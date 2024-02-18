@@ -5,9 +5,7 @@
 using namespace std;
 
 // Function to generate a random password
-
 string generatePassword(int minLength, int maxLength, bool includeLower, bool includeUpper, bool includeNumbers, bool includeSymbols, const string& customChars = "") { 
-//все возможные продукты 
     string password = ""; // Initialize an empty password(представь что это чаша 
     string allChars = ""; // Initialize an empty string for all possible characters(и это как бы сумка из продуктов 
 
