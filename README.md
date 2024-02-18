@@ -1,1 +1,79 @@
-# String-processing-project
+#include <iostream>
+#include <cstdlib> 
+#include <ctime>
+#include <string>
+using namespace std;
+
+// Function to generate a random password
+
+string generatePassword(int minLength, int maxLength, bool includeLower, bool includeUpper, bool includeNumbers, bool includeSymbols, const string& customChars = "") { 
+//все возможные продукты 
+    string password = ""; // Initialize an empty password(представь что это чаша 
+    string allChars = ""; // Initialize an empty string for all possible characters(и это как бы сумка из продуктов 
+
+    // Add lowercase letters if we need them(if we chooce it)
+    if (includeLower)
+        allChars += "abcdefghijklmnopqrstuvwxyz"; //мы даем програм. значение for includeLower
+
+    // Add uppercase letters if requested
+    if (includeUpper)
+        allChars += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+    // Add numbers if requested
+    if (includeNumbers)
+        allChars += "0123456789";
+
+    // Add symbols if requested
+    if (includeSymbols)
+        allChars += "!@#$%^&*_";
+
+    // Add custom characters
+    allChars += customChars; 
+
+    // Check if any character set is selected
+    if (allChars.empty()) {
+        cerr << "Error: No character set selected!" << endl;
+        return password; // Return an empty password
+    }
+
+    // Generate a random password length between minLength and maxLength (just numbers)
+    srand(time(nullptr));
+    int length = minLength + rand() % (maxLength - minLength + 1);
+
+    // Construct the password by randomly selecting characters
+    for (int i = 0; i < length; ++i) {
+        password += allChars[rand() % allChars.length()];
+    }
+
+    return password; // Return the generated password
+}
+
+int main() {
+    int minLength, maxLength;
+    bool includeLower, includeUpper, includeNumbers, includeSymbols;
+    string customChars;
+
+    // Get user input for password criteria
+    cout << "Enter minimum length of password: ";
+    cin >> minLength;
+    cout << "Enter maximum length of password: ";
+    cin >> maxLength;
+
+    cout << "Include lowercase letters? (1 for yes, 0 for no): ";
+    cin >> includeLower;
+    cout << "Include uppercase letters? (1 for yes, 0 for no): ";
+    cin >> includeUpper;
+    cout << "Include numbers? (1 for yes, 0 for no): ";
+    cin >> includeNumbers;
+    cout << "Include symbols? (1 for yes, 0 for no): ";
+    cin >> includeSymbols;
+
+    cin.ignore(); // Clear input buffer
+    cout << "Enter custom characters (leave empty for none): ";
+    getline(cin, customChars);
+
+    // Generate and display the password
+    cout << "Generated Password: " << generatePassword(minLength, maxLength, includeLower, includeUpper, includeNumbers, includeSymbols, customChars) << endl;
+
+    return 0;
+}
