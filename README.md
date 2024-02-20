@@ -77,7 +77,7 @@ int main() {
         cout << "Generated Password: " << generatePassword(minLength, maxLength, includeLower, includeUpper, includeNumbers, includeSymbols, customChars) << endl;
 
         // Ask the user if they want to regenerate a new password
-        cout << "Would you like to regenerate a new password? (y/n): ";
+        cout << "Would you like to regenerate a new password? (y for yes, n for no ): ";
         cin >> regenerate;
     }
 
